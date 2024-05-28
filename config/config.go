@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/ilyakaznacheev/cleanenv"
-	"github.com/joho/godotenv"
 )
 
 type ConfigDatabase struct {
@@ -16,27 +15,8 @@ type ConfigDatabase struct {
 }
 
 // prod
-// func LoadConfig() (ConfigDatabase, error) {
-// 	var cfg ConfigDatabase
-// 	err := cleanenv.ReadEnv(&cfg)
-// 	if err != nil {
-// 		log.Println("Error reading environment variables")
-// 	} else {
-// 		log.Printf("Loaded config: %#v\n", cfg)
-// 	}
-// 	return cfg, err
-// }
-
-//debug
-
 func LoadConfig() (ConfigDatabase, error) {
 	var cfg ConfigDatabase
-
-	// Load .env file if it exists
-	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found")
-	}
-
 	err := cleanenv.ReadEnv(&cfg)
 	if err != nil {
 		log.Println("Error reading environment variables")
@@ -45,3 +25,22 @@ func LoadConfig() (ConfigDatabase, error) {
 	}
 	return cfg, err
 }
+
+//debug
+
+// func LoadConfig() (ConfigDatabase, error) {
+// 	var cfg ConfigDatabase
+
+// 	// Load .env file if it exists
+// 	if err := godotenv.Load(); err != nil {
+// 		log.Println("No .env file found")
+// 	}
+
+// 	err := cleanenv.ReadEnv(&cfg)
+// 	if err != nil {
+// 		log.Println("Error reading environment variables")
+// 	} else {
+// 		log.Printf("Loaded config: %#v\n", cfg)
+// 	}
+// 	return cfg, err
+// }
