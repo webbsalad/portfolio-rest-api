@@ -34,11 +34,11 @@ jobs:
         DB_USER: ${{ secrets.DB_USER }}
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
-        vercel env add DB_PORT production < $DB_PORT
-        vercel env add DB_HOST production < $DB_HOST
-        vercel env add DB_NAME production < $DB_NAME
-        vercel env add DB_USER production < $DB_USER
-        vercel env add DB_PASSWORD production < $DB_PASSWORD
+        echo "$DB_PORT" | vercel env add DB_PORT production
+        echo "$DB_HOST" | vercel env add DB_HOST production
+        echo "$DB_NAME" | vercel env add DB_NAME production
+        echo "$DB_USER" | vercel env add DB_USER production
+        echo "$DB_PASSWORD" | vercel env add DB_PASSWORD production
 
     - name: Deploy to Vercel
       env:

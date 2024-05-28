@@ -14,7 +14,6 @@ type ConfigDatabase struct {
 	Password string `env:"DB_PASSWORD"`
 }
 
-// prod
 func LoadConfig() (ConfigDatabase, error) {
 	var cfg ConfigDatabase
 	err := cleanenv.ReadEnv(&cfg)
@@ -23,6 +22,12 @@ func LoadConfig() (ConfigDatabase, error) {
 	} else {
 		log.Printf("Loaded config: %#v\n", cfg)
 	}
+
+	// Дополнительные проверки и вывод логов для диагностики
+	if cfg.Port == "" || cfg.Host == "" || cfg.Name == "" || cfg.User == "" || cfg.Password == "" {
+		log.Println("One or more required environment variables are empty")
+	}
+
 	return cfg, err
 }
 
